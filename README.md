@@ -19,8 +19,7 @@ Easymobile is a js plugin uses for mobile gestures, support advanced setting and
 ---
 
 #### Instruction:
-1. Add new gesture to element, **this** already bind to element by default `$e(element).tap(fn(e)[, this])`
-2. Optional, Init Plugins
++ Optional, Init Plugins
 ```javascript
 $e.mobileEventInit({
         isActive: true,    //active plugin
@@ -29,15 +28,21 @@ $e.mobileEventInit({
         timeOut: 700,      //listen time for long press
     })
 ```
++  Add new gesture to element, **this** already bind to element by default `$e(element).tap(fn(e)[, this])`
+
 <br/>
 
 ---
 
-#### Init Options Default:
-+ **isActive**: true (default)
-+ **delayTime**: 200 (defalut,ms)
-+ **areaDetect**: 10 (default, px)
-+ **timeOut**: 700 (default, ms)
+#### Init Options:
++ **isActive**: active plugin
+    + true (default)
++ **delayTime**: waiting time for second tap
+    + 200 (defalut,ms)
++ **areaDetect**: tolerate value for finger slightly shift on screen
+    + 10 (default, px)
++ **timeOut**: listen time for long press
+    + 700 (default, ms)
 
 <br/>
 
