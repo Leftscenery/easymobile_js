@@ -86,10 +86,10 @@ For different gestures, some extra attributes already injected in **'event'** ob
 >+ e.**touchStartY**: start Y
 >+ e.**touchChangeX**: changed X
 >+ e.**touchChangeY**: changed Y
----
+
 > **pinchIn / pinchOut**
 >+ e.**touchChange**: distance from start to end
----
+
 > **move**
 >+ e.**x**: end X
 >+ e.**y**: end Y
