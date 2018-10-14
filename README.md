@@ -3,8 +3,8 @@ easymobile_js
 #### Introduction:
 Easymobile is a js plugin uses for mobile gestures, support advanced setting and has express way to get changed value.
 
----
 <br/>
+---
 
 #### Key Feature:
 + Easy and quick to setup and use
@@ -13,8 +13,8 @@ Easymobile is a js plugin uses for mobile gestures, support advanced setting and
 + Quickly get changed position value
 + Custom Setting
 
----
 <br/>
+---
 
 #### Instruction:
 1. Add new gesture to element, **this** already bind to element by default `$e(element).tap(fn(e)[, this])`
@@ -27,8 +27,8 @@ $e.mobileEventInit({
         timeOut: 700,      //listen time for long press
     })
 ```
----
 <br/>
+---
 
 #### Init Options:
 + **isActive**: true (default)
@@ -36,8 +36,8 @@ $e.mobileEventInit({
 + **areaDetect**: 10 (default, px)
 + **timeOut**: 700 (default, ms)
 
----
 <br/>
+---
 
 #### Gesture Support
 + $e(element).<br>
@@ -48,9 +48,9 @@ $e.mobileEventInit({
     + **swipeUp** / Down / Left / Right(fn(e),this)
     + **pinchIn** / Out(fn(e),this)
     + **move**(fn(e),this)
-    
----
+   
 <br/>
+---
 
 #### Add Event
 ```javascript
@@ -63,8 +63,8 @@ $e(element).tap(fn)
 + No repeat event
 + Event object will automatically pass into the function
 
----
 <br/>
+---
 
 #### Remove Event
 ```javascript
@@ -74,8 +74,8 @@ $e(element).tapRemove()
 + Remove specific event by pass fn
 + Remove all events by pass nothing
 
----
 <br/>
+---
 
 #### Additional Attributes
 For different gestures, some extra attributes already injected in **'event'** object, all 'px' based
@@ -100,9 +100,8 @@ For different gestures, some extra attributes already injected in **'event'** ob
 >+ e.**movePrevX**: previous tick X
 >+ e.**movePrevY**: previous tick Y
 
-
----
 <br/>
+---
 
 #### Notice
 + When set swipe and swipeLeft/Right/Up/Down or move, both of them will be listened
