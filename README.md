@@ -33,7 +33,7 @@ $e.mobileEventInit({
 
 ---
 
-#### Init Options:
+#### Init Options Default:
 + **isActive**: true (default)
 + **delayTime**: 200 (defalut,ms)
 + **areaDetect**: 10 (default, px)
