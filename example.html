@@ -59,7 +59,7 @@ $j(element).moveRemove(fn(e),this)
 </body>
 </html>
 
-<script src="mobilevent_js.js"></script>
+<script src="easymobile.js"></script>
 <script>
     let box = document.getElementsByClassName('box')[0];
     box.style.left = getComputedStyle(box)['left'];
@@ -74,27 +74,24 @@ $j(element).moveRemove(fn(e),this)
         timeOut:700,        //long press timeout time
     });
 
-
-
+    //add different to body
+    //this already bind to element
     $e(document.body).tap(()=>{console.log('tap')});
     $e(document.body).swipeUp(()=>{console.log('swipeUp')});
     $e(document.body).swipeLeft(()=>{console.log('swipeLeft')});
     $e(document.body).swipeDown(()=>{console.log('swipeDown')});
     $e(document.body).swipeRight(()=>{console.log('swipeRight')});
 
-    // 拖动：到相关位置
+    //drag box to new position
     $e(box).move(function(e){
         this.style.transition = '';
         this.style.left = e.moveChangeX + parseFloat(this.style.left) + 'px';
         this.style.top = e.moveChangeY + parseFloat(this.style.top) + 'px';
     });
 
-    //单击：放大\缩小+透明度恢复
+    //double tap on the box to scale it.
     $e(box).doubleTap(function(){
         this.style.transition = 'all 0.3s';
         this.style.transform == 'scale(1.5)' ? this.style.transform = 'scale(1)' : this.style.transform = 'scale(1.5)';
     });
-    //
-    //
-    //
 </script>

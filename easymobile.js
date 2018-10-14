@@ -1,6 +1,6 @@
 /*
  * VERSION: 1.0.0
- * DATE: 2018-10
+ * DATE: 2018-08
  *
  * @ author: Jiawei Zhou, leftscenery@gmail.com
  * @ github: https://github.com/Leftscenery
@@ -24,8 +24,8 @@
     EasyMobile.init.prototype = EasyMobile.prototype = {
         constructor: EasyMobile,
         copyright: 'JiaweiZhou',
-        time: 'create 2018-08-09',
-        //类数组转数组
+        time: 'create 2018-08',
+        //Array like to Array
         toArray: function () {
             var result = [];
             var curEle = this.ele;
@@ -283,14 +283,18 @@
         },
         remove: function remove(fn) {
             var that = this;
-            EasyMobile.Plan.each(that.planList, function (item, index) {
-                if (fn === item) {
-                    //prevent array collapse
-                    that.planList[index] = null;
-                    that.thisList[index] = null;
-                    return false
-                }
-            })
+            if(fn){
+                EasyMobile.Plan.each(that.planList, function (item, index) {
+                    if (fn === item) {
+                        //prevent array collapse
+                        that.planList[index] = null;
+                        that.thisList[index] = null;
+                        return false
+                    }
+                })
+            }else{
+                that.planList = [];
+            }
         },
         check: function check() {
             var that = this;
@@ -351,6 +355,8 @@
             e.movePrevY = EasyMobile.mobileEventPrams.movePrevY;
             e.moveChangeX = e.changedTouches[0].pageX - EasyMobile.mobileEventPrams.movePrevX;
             e.moveChangeY = e.changedTouches[0].pageY - EasyMobile.mobileEventPrams.movePrevY;
+            e.x = e.changedTouches[0].pageX;
+            e.y = e.changedTouches[0].pageY;
             EasyMobile.mobileEventPrams.movePrevX = e.changedTouches[0].pageX;
             EasyMobile.mobileEventPrams.movePrevY = e.changedTouches[0].pageY;
             if (!!target.movePool) {
@@ -406,6 +412,8 @@
                             e.touchStartY = EasyMobile.mobileEventPrams.touchStartY;
                             e.touchChangeX = e.changedTouches[0].pageX - EasyMobile.mobileEventPrams.touchStartX;
                             e.touchChangeY = e.changedTouches[0].pageY - EasyMobile.mobileEventPrams.touchStartY;
+                            e.x = e.changedTouches[0].pageX;
+                            e.y = e.changedTouches[0].pageY;
                             if (Math.abs(moveX) > Math.abs(moveY)) {
                                 //X move
                                 if (moveX >= 0) {
@@ -441,6 +449,8 @@
                         e.touchStartY = EasyMobile.mobileEventPrams.touchStartY;
                         e.touchChangeX = e.changedTouches[0].pageX - EasyMobile.mobileEventPrams.touchStartX;
                         e.touchChangeY = e.changedTouches[0].pageY - EasyMobile.mobileEventPrams.touchStartY;
+                        e.x = e.changedTouches[0].pageX;
+                        e.y = e.changedTouches[0].pageY;
                         if (Math.abs(moveX) > Math.abs(moveY)) {
                             //X movement
                             if (moveX >= 0) {
