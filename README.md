@@ -4,6 +4,7 @@ easymobile_js
 Easymobile is a js plugin uses for mobile gestures, support advanced setting and has express way to get changed value.
 
 <br/>
+
 ---
 
 #### Key Feature:
@@ -14,6 +15,7 @@ Easymobile is a js plugin uses for mobile gestures, support advanced setting and
 + Custom Setting
 
 <br/>
+
 ---
 
 #### Instruction:
@@ -28,6 +30,7 @@ $e.mobileEventInit({
     })
 ```
 <br/>
+
 ---
 
 #### Init Options:
@@ -37,6 +40,7 @@ $e.mobileEventInit({
 + **timeOut**: 700 (default, ms)
 
 <br/>
+
 ---
 
 #### Gesture Support
@@ -50,6 +54,7 @@ $e.mobileEventInit({
     + **move**(fn(e),this)
    
 <br/>
+
 ---
 
 #### Add Event
@@ -64,6 +69,7 @@ $e(element).tap(fn)
 + Event object will automatically pass into the function
 
 <br/>
+
 ---
 
 #### Remove Event
@@ -75,6 +81,7 @@ $e(element).tapRemove()
 + Remove all events by pass nothing
 
 <br/>
+
 ---
 
 #### Additional Attributes
@@ -101,13 +108,15 @@ For different gestures, some extra attributes already injected in **'event'** ob
 >+ e.**movePrevY**: previous tick Y
 
 <br/>
+
 ---
 
 #### Notice
 + When set swipe and swipeLeft/Right/Up/Down or move, both of them will be listened
 
+<br/>
 
 ---
-<br/>
+
 Feel free to let me know if there are any functions or parts need to be fixed :)
 <br>By Jiawei Zhou 2018
