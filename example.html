@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow:hidden;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale = 1.0, maximum-scale = 1.0 minimum-scale = 1.0">
+    <title>Mobile Event Demo</title>
+</head>
+<script>
+/*
+--------->移动端事件，this指向element。可以传入绑定的this，默认为绑定事件的元素。
+--------->在swipe函数中的e，多包括了四个属性（touchStartX,touchStartY,touchChangeX,touchChangeY）
+--------->在pinch系列函数中的e，多包括了一个属性（touchChange）
+--------->在move函数中的e，多包括了六个属性（moveStartX,moveStartY,moveChangeX,moveChangeY,movePrevX,movePrevY）
+--------->设定默认参数
+$j.mobileEventInit({
+        isActive: true      //是否生效，默认加载已生效
+        delayTime:200，     //等待双击事件
+        areaDetect:10，     //点击范围容忍值
+        timeOut：700        //按住多少ms后判定点击失败
+    })
+//--------->add event
+$j(element).tap(fn(e),this)
+$j(element).doubleTap(fn(e),this)
+$j(element).longTap(fn(e),this)
+$j(element).swipe(fn(e),this)
+$j(element).swipeUp/Down/Left/Right(fn(e),this)
+$j(element).pinchIn/Out(fn(e),this)
+$j(element).move(fn(e),this)
+//--------->remove event
+$j(element).tapRemove(fn(e),this)
+$j(element).doubleTapRemove(fn(e),this)
+$j(element).longTapRemove(fn(e),this)
+$j(element).swipeRemove(fn(e),this)
+$j(element).swipeUpRemove/DownRemove/LeftRemove/RightRemove(fn(e),this)
+$j(element).pinchInRemove/OutRemove(fn(e),this)
+$j(element).moveRemove(fn(e),this)
+*/
+</script>
+
+<style>
+    html,body{
+        height: 100%;
+        width: 100%;
+    }
+    .box{
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        top:calc(50% - 50px);
+        left:calc(50% - 50px);
+        background-color: lightskyblue;
+    }
+</style>
+
+<body>
+<div class="box">
+
+</div>
+</body>
+</html>
+
+<script src="mobilevent_js.js"></script>
+<script>
+    let box = document.getElementsByClassName('box')[0];
+    box.style.left = getComputedStyle(box)['left'];
+    box.style.top = getComputedStyle(box)['top'];
+
+
+    //general setting for
+    $e.mobileEventInit({
+        isActive: true,      //active the plugin
+        delayTime:200,     //waiting time for double tap
+        areaDetect:10,     //duration area
+        timeOut:700,        //long press timeout time
+    });
+
+
+
+    $e(document.body).tap(()=>{console.log('tap')});
+    $e(document.body).swipeUp(()=>{console.log('swipeUp')});
+    $e(document.body).swipeLeft(()=>{console.log('swipeLeft')});
+    $e(document.body).swipeDown(()=>{console.log('swipeDown')});
+    $e(document.body).swipeRight(()=>{console.log('swipeRight')});
+
+    // 拖动：到相关位置
+    $e(box).move(function(e){
+        this.style.transition = '';
+        this.style.left = e.moveChangeX + parseFloat(this.style.left) + 'px';
+        this.style.top = e.moveChangeY + parseFloat(this.style.top) + 'px';
+    });
+
+    //单击：放大\缩小+透明度恢复
+    $e(box).doubleTap(function(){
+        this.style.transition = 'all 0.3s';
+        this.style.transform == 'scale(1.5)' ? this.style.transform = 'scale(1)' : this.style.transform = 'scale(1.5)';
+    });
+    //
+    //
+    //
+</script>
