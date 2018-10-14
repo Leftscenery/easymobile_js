@@ -1,6 +1,6 @@
 /*
  * VERSION: 1.0.0
- * DATE: 2018-08
+ * RELEASE: 2018
  *
  * @ author: Jiawei Zhou, leftscenery@gmail.com
  * @ github: https://github.com/Leftscenery
