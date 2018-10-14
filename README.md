@@ -1,9 +1,9 @@
 easymobile_js
 ---
-#### Introduction:
-Easymobile is a js plugin uses for mobile gestures, support advanced setting and has express way to get changed value.
 
 <br/>
+
+Easymobile is a js plugin uses for mobile gestures, support advanced setting and has express way to get changed value.
 
 ---
 
