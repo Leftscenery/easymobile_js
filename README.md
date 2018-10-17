@@ -69,7 +69,7 @@ $e(element).tap(fn)
 + Element can be real **element** or **string**, such as `'.box1' '#box1'`
 + Can add more than one event to element
 + When gesture is detected, all event will call follow by the order added
-+ **'this'** is ready bind to element
++ **'this'** is ready bind to element, but you can still bind to other element by using `$e(element).tap(fn, this)`
 + No repeat event
 + Event object will automatically pass into the function
 
@@ -118,6 +118,7 @@ For different gestures, some extra attributes already injected in **'event'** ob
 
 #### Notice
 + When set swipe and swipeLeft/Right/Up/Down or move, both of them will be listened
++ When swipeLeft/Right/Up/Down exist, swipe will not work
 
 <br/>
 

@@ -1,5 +1,5 @@
 /*
- * VERSION: 1.0.0
+ * VERSION: 1.0.1
  * RELEASE: 2018
  *
  * @ author: Jiawei Zhou, leftscenery@gmail.com
@@ -25,6 +25,7 @@
         constructor: EasyMobile,
         copyright: 'JiaweiZhou',
         time: 'create 2018-08',
+
         //Array like to Array
         toArray: function () {
             var result = [];
@@ -273,7 +274,7 @@
     };
     EasyMobile.Plan.prototype = {
         constructor: EasyMobile.Plan,
-        add: function add(fn, that) {
+        add: function add(fn, isBubble, that) {
             var flag = true;
             EasyMobile.Plan.each(this.planList, function (item, index) {
                 if (item === fn) flag = false;
@@ -347,7 +348,6 @@
         }
     };
     EasyMobile.touchMoveEvent = function(e){
-        let target = e.target;
         if (e.changedTouches.length <= 1) {
             e.moveStartX = EasyMobile.mobileEventPrams.touchStartX;
             e.moveStartY = EasyMobile.mobileEventPrams.touchStartY;
@@ -359,13 +359,12 @@
             e.y = e.changedTouches[0].pageY;
             EasyMobile.mobileEventPrams.movePrevX = e.changedTouches[0].pageX;
             EasyMobile.mobileEventPrams.movePrevY = e.changedTouches[0].pageY;
-            if (!!target.movePool) {
-                target.movePool.fire(e);
+            if (!!EasyMobile.bubble('movePool',e).tapPool) {
+                EasyMobile.bubble('movePool',e).tapPool.fire(e);
             }
         }
     };
     EasyMobile.touchEndEvent = function(e){
-        let target = e.target;
         let moveX = e.changedTouches[0].pageX - EasyMobile.mobileEventPrams.touchStartX;
         let moveY = e.changedTouches[0].pageY - EasyMobile.mobileEventPrams.touchStartY;
         let moveDistance = Math.sqrt(Math.pow(moveX, 2) + Math.pow(moveY, 2));
@@ -378,13 +377,13 @@
                 if((Math.abs(EasyMobile.mobileEventPrams.touchStartX-EasyMobile.mobileEventPrams.touchStartXX)-Math.abs(e.changedTouches[0].pageX-e.changedTouches[1].pageX)>0)&&(Math.abs(EasyMobile.mobileEventPrams.touchStartY-EasyMobile.mobileEventPrams.touchStartYY)-Math.abs(e.changedTouches[0].pageY-e.changedTouches[1].pageY)>0)){
                     //pinch in
                     e.touchChange = Math.sqrt(Math.pow((Math.abs(EasyMobile.mobileEventPrams.touchStartX-EasyMobile.mobileEventPrams.touchStartXX)-Math.abs(e.changedTouches[0].pageX-e.changedTouches[1].pageX)),2)+Math.pow((Math.abs(EasyMobile.mobileEventPrams.touchStartY-EasyMobile.mobileEventPrams.touchStartYY)-Math.abs(e.changedTouches[0].pageY-e.changedTouches[1].pageY)),2));
-                    if (!!target.pinchInPool) {
-                        target.pinchInPool.fire(e);
+                    if (!!EasyMobile.bubble('pinchInPool',e).tapPool) {
+                        EasyMobile.bubble('pinchInPool',e).tapPool.fire(e);
                     }
                 }else{
                     //pinch out
-                    if (!!target.pinchOutPool) {
-                        target.pinchOutPool.fire(e);
+                    if (!!EasyMobile.bubble('pinchOutPool',e).tapPool) {
+                        EasyMobile.bubble('pinchOutPool',e).tapPool.fire(e);
                     }
                 }
             }
@@ -395,15 +394,15 @@
                 if (e.timeStamp - EasyMobile.mobileEventPrams.touchStartTime < EasyMobile.mobileEventPrams.delayTime) {
                     if (e.timeStamp - EasyMobile.mobileEventPrams.touchPrevEndTime < EasyMobile.mobileEventPrams.delayTime) {
                         //double tap
-                        if (!!target.doubleTapPool) {
-                            target.doubleTapPool.fire(e);
+                        if (!!EasyMobile.bubble('doubleTapPool',e).tapPool) {
+                            EasyMobile.bubble('doubleTapPool',e).tapPool.fire(e);
                         }
                         EasyMobile.mobileEventPrams.touchPrevEndTime = 0;
                     } else {
                         if (moveDistance <= EasyMobile.mobileEventPrams.areaDetect) {
                             //single tap
-                            if (!!target.tapPool) {
-                                target.tapPool.fire(e);
+                            if (!!EasyMobile.bubble('tapPool',e).tapPool) {
+                                EasyMobile.bubble('tapPool',e).tapPool.fire(e);
                             }
                             EasyMobile.mobileEventPrams.touchPrevEndTime = e.timeStamp;
                         } else {
@@ -418,19 +417,19 @@
                                 //X move
                                 if (moveX >= 0) {
                                     //swipe right
-                                    (!!target.swipeRightPool) ? target.swipeRightPool.fire(e) : (!!target.swipePool) ? target.swipePool.fire(e) : null;
+                                    (!!EasyMobile.bubble('swipeRightPool',e).swipeRightPool) ? EasyMobile.bubble('swipeRightPool',e).swipeRightPool.fire(e) : (!!EasyMobile.bubble('swipePool',e).swipePool) ? EasyMobile.bubble('swipePool',e).swipePool.fire(e) : null;
                                 } else {
                                     //swipe left
-                                    (!!target.swipeLeftPool) ? target.swipeLeftPool.fire(e) : (!!target.swipePool) ? target.swipePool.fire(e) : null;
+                                    (!!EasyMobile.bubble('swipeLeftPool',e).swipeLeftPool) ? EasyMobile.bubble('swipeLeftPool',e).swipeLeftPool.fire(e) : (!!EasyMobile.bubble('swipePool',e).swipePool) ? EasyMobile.bubble('swipePool',e).swipePool.fire(e) : null;
                                 }
                             } else {
                                 //Y move
                                 if (moveY >= 0) {
                                     //swipe down
-                                    (!!target.swipeDownPool) ? target.swipeDownPool.fire(e) : (!!target.swipePool) ? target.swipePool.fire(e) : null;
+                                    (!!EasyMobile.bubble('swipeDownPool',e).swipeDownPool) ? EasyMobile.bubble('swipeDownPool',e).swipeDownPool.fire(e) : (!!EasyMobile.bubble('swipePool',e).swipePool) ? EasyMobile.bubble('swipePool',e).swipePool.fire(e) : null;
                                 } else {
                                     //swipe up
-                                    (!!target.swipeUpPool) ? target.swipeUpPool.fire(e) : (!!target.swipePool) ? target.swipePool.fire(e) : null;
+                                    (!!EasyMobile.bubble('swipeUpPool',e).swipeUpPool) ? EasyMobile.bubble('swipeUpPool',e).swipeUpPool.fire(e) : (!!EasyMobile.bubble('swipePool',e).swipePool) ? EasyMobile.bubble('swipePool',e).swipePool.fire(e) : null;
                                 }
                             }
                             EasyMobile.mobileEventPrams.touchPrevEndTime = 0;
@@ -439,12 +438,10 @@
                 } else {
                     if (moveDistance <= EasyMobile.mobileEventPrams.areaDetect) {
                         //long press
-                        if (!!target.longTapPool) {
-                            target.longTapPool.fire(e);
-                        }
+                        EasyMobile.bubble('longTapPool',e);
                         EasyMobile.mobileEventPrams.touchPrevEndTime = e.timeStamp;
                     } else {
-                        //移动
+                        //movement
                         e.touchStartX = EasyMobile.mobileEventPrams.touchStartX;
                         e.touchStartY = EasyMobile.mobileEventPrams.touchStartY;
                         e.touchChangeX = e.changedTouches[0].pageX - EasyMobile.mobileEventPrams.touchStartX;
@@ -455,19 +452,19 @@
                             //X movement
                             if (moveX >= 0) {
                                 //swipe right
-                                (!!target.swipeRightPool) ? target.swipeRightPool.fire(e) : (!!target.swipePool) ? target.swipePool.fire(e) : null;
+                                (!!EasyMobile.bubble('swipeRightPool',e).swipeRightPool) ? EasyMobile.bubble('swipeRightPool',e).swipeRightPool.fire(e) : (!!EasyMobile.bubble('swipePool',e).swipePool) ? EasyMobile.bubble('swipePool',e).swipePool.fire(e) : null;
                             } else {
                                 //swipe left
-                                (!!target.swipeLeftPool) ? target.swipeLeftPool.fire(e) : (!!target.swipePool) ? target.swipePool.fire(e) : null;
+                                (!!EasyMobile.bubble('swipeLeftPool',e).swipeLeftPool) ? EasyMobile.bubble('swipeLeftPool',e).swipeLeftPool.fire(e) : (!!EasyMobile.bubble('swipePool',e).swipePool) ? EasyMobile.bubble('swipePool',e).swipePool.fire(e) : null;
                             }
                         } else {
                             //Y movement
                             if (moveY >= 0) {
                                 //swipe down
-                                (!!target.swipeDownPool) ? target.swipeDownPool.fire(e) : (!!target.swipePool) ? target.swipePool.fire(e) : null;
+                                (!!EasyMobile.bubble('swipeDownPool',e).swipeDownPool) ? EasyMobile.bubble('swipeDownPool',e).swipeDownPool.fire(e) : (!!EasyMobile.bubble('swipePool',e).swipePool) ? EasyMobile.bubble('swipePool',e).swipePool.fire(e) : null;
                             } else {
                                 //swipe up
-                                (!!target.swipeUpPool) ? target.swipeUpPool.fire(e) : (!!target.swipePool) ? target.swipePool.fire(e) : null;
+                                (!!EasyMobile.bubble('swipeUpPool',e).swipeUpPool) ? EasyMobile.bubble('swipeUpPool',e).swipeUpPool.fire(e) : (!!EasyMobile.bubble('swipePool',e).swipePool) ? EasyMobile.bubble('swipePool',e).swipePool.fire(e) : null;
                             }
                         }
                         EasyMobile.mobileEventPrams.touchPrevEndTime = 0;
@@ -499,6 +496,19 @@
             window.removeEventListener('touchstart',EasyMobile.touchStartEvent);
             window.removeEventListener('touchmove',EasyMobile.touchMoveEvent);
             window.removeEventListener('touchend',EasyMobile.touchEndEvent);
+        }
+    };
+
+    //Bubble
+    EasyMobile.bubble = function(pool,e){
+        let ele = e.target;
+        if(ele[pool]){
+            return ele
+        }else if(e.bubbles){
+            while(!ele[pool] && ele!=document.body){
+                ele = ele.parentNode
+            }
+            return ele
         }
     };
 
