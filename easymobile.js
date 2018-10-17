@@ -234,20 +234,20 @@
             }
         },
 
-        //屏蔽默认的click事件和dblclick事件
+        //todo: not sure need stop bubble
         mobileEventPrepare: function (ele) {
-            ele.onclick = function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            };
-            ele.onmousemove = function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            };
-            ele.ondblclick = function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            };
+            // ele.onclick = function (e) {
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            // };
+            // ele.onmousemove = function (e) {
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            // };
+            // ele.ondblclick = function (e) {
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            // };
         }
     }
 
