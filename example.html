@@ -7,30 +7,58 @@
 </head>
 
 <style>
+    *{
+        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+    }
     html,body{
         height: 100%;
         width: 100%;
     }
-    .box{
+    #box1{
         position: absolute;
-        height: 100px;
-        width: 100px;
-        top:calc(50% - 50px);
-        left:calc(50% - 50px);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 30vh;
+        background-color: #74C274;
+    }
+    #box{
+        position: absolute;
+        height: 150px;
+        width: 150px;
+        top:calc(50% - 30px);
+        left:calc(50% - 75px);
         background-color: lightskyblue;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+    }
+    #textHolder{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    p{
+        display: block;
+        color: white;
     }
 </style>
 
 <body>
-<div class="box">
-
+<div id="box1">
+    <p id="textHolder">Swipe in Green</p>
+</div>
+<div id="box">
+    <p>Drag to move</p>
+    <p>Double tap to scale</p>
 </div>
 </body>
 </html>
 
 <script src="easymobile.js"></script>
 <script>
-    let box = document.getElementsByClassName('box')[0];
     box.style.left = getComputedStyle(box)['left'];
     box.style.top = getComputedStyle(box)['top'];
 
@@ -45,11 +73,10 @@
 
     //add different to body
     //this already bind to element
-    $e(document.body).tap(()=>{console.log('tap')});
-    $e(document.body).swipeUp(()=>{console.log('swipeUp')});
-    $e(document.body).swipeLeft(()=>{console.log('swipeLeft')});
-    $e(document.body).swipeDown(()=>{console.log('swipeDown')});
-    $e(document.body).swipeRight(()=>{console.log('swipeRight')});
+    $e(box1).swipeUp(()=>{textHolder.innerText='You Just Swipe Up!'});
+    $e(box1).swipeLeft(()=>{textHolder.innerText='You Just Swipe Left!'});
+    $e(box1).swipeDown(()=>{textHolder.innerText='You Just Swipe Down!'});
+    $e(box1).swipeRight(()=>{textHolder.innerText='You Just Swipe Right!'});
 
     //drag box to new position
     $e(box).move(function(e){
